@@ -29,11 +29,15 @@ public class QuickTest {
 		int pivotLocation;
 
 		Stack<IntPair> s = new Stack<IntPair>();
-		s.push(new IntPair(0, -1)); // a marker to identify the bottom of the stack
+		s.push(new IntPair(0, -1)); // a marker to identify the bottom of the
+									// stack
 		while (!s.isEmpty()) {
 			while (low <= high) {
 				pivotLocation = partition(list, low, high);
-				s.push(new IntPair(pivotLocation + 1, high)); // record info for second recursive call
+				s.push(new IntPair(pivotLocation + 1, high)); // record info for
+																// second
+																// recursive
+																// call
 				high = pivotLocation - 1; // execute first recursive call
 			}
 			IntPair pop = s.pop(); // fetch next recursive call to execute
@@ -76,6 +80,22 @@ public class QuickTest {
 
 	}
 
+	private static int medianOfThree(int arr[], int left, int right) {
+		int mid;
+
+		mid = (left + right) / 2;
+
+		// left, mid, right의 숫자들의 크기를 순서대로 정렬할 것이다.
+		if (arr[left] > arr[mid]) // 좌측과 중간값을 비교해서 정렬
+			swap(arr, left, mid);
+		if (arr[left] > arr[right]) // 거기서 좌측을 우측값과 비교해서 정렬
+			swap(arr, left, right);
+		if (arr[mid] > arr[right]) // 마지막으로 중간값과 우측값을 비교해서 정렬
+			swap(arr, mid, right);
+
+		return mid;
+	}
+
 	private static void swap(int[] dataSet, int left, int right) {
 		int temp = dataSet[right];
 		dataSet[right] = dataSet[left];
@@ -89,14 +109,14 @@ public class QuickTest {
 		sort(dataSet, 0, dataSet.length - 1);
 		System.out.println(Arrays.toString(dataSet));
 	}
-	
+
 	@Test
 	public void testStack() throws Exception {
 		int[] dataSet = { 8, 4, 7, 3, 1, 5 };
 
 		sortStack(dataSet, dataSet.length);
 		System.out.println(Arrays.toString(dataSet));
-		
+
 	}
 
 }
